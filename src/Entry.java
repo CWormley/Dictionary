@@ -1,3 +1,14 @@
+/****************************************************************
+*
+* File: Entry.java
+* By: Claudia Wormley
+* Date: 6/21/2024
+*
+* Description: Enrty Object Class creates entries for all definitions provided, uniquee and otherwise. The two values stored in this class
+* are the part of speech enum, and the string meaning.  Appropriate constructors, 
+setters and getters are included along with support functions.
+****************************************************************/
+
 //using hash map structure, use dictionary definition as pointer to linked list of entries
 
 enum PartofSpeech{

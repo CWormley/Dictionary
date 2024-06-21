@@ -1,3 +1,13 @@
+/****************************************************************
+*
+* File: Definition.java
+* By: Claudia Wormley
+* Date: 6/21/2024
+*
+* Description: Enum object class for all unique word entries in the dictionary. Appropriate constructors, 
+setters and getters are included along with support functions.
+*
+****************************************************************/
 // Create object class for all definitions stored in dictionary
 // Store the original data in a set of enum objects.
 // also enum for part of speech
@@ -9,11 +19,12 @@
 //Therefore, enums must play a less substaintial role in the data structure design.
 
 public enum Definition{ //enum data structure
-    CAT("cat"),
-    RUN("run"),
-    HAPPY("happy"),
-    QUICKLY("quickly"),
-    DOG("dog");
+    DISTINCT("Distinct"),
+    ARROW("Arrow"),
+    BOOK("Book"),
+    PLACEHOLDER("Placeholder"),
+    REVERSE("Reverse");
+
 
     private final String word;
     private Definition def; 
@@ -36,7 +47,7 @@ public enum Definition{ //enum data structure
     }
     //GETTERS
     public String getWord(){
-        return word;
+        return word.toLowerCase();
     }
     public Definition getDefinition(){
         return def;

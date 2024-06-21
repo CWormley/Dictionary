@@ -1,3 +1,14 @@
+/****************************************************************
+*
+* File: Dictionary.java
+* By: Claudia Wormley
+* Date: 6/21/2024
+*
+* Description: Dictonary Object Class creates a hashmap that uses the unique word entries stored in Definiton enum as keys linking
+to, an array list of entries associated with that key word. Also included in this class are filter functions that return a revised 
+* list of entries based of the given filter command. Appropriate constructors, 
+* setters and getters are included along with support functions.
+****************************************************************/
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -65,6 +76,15 @@ public class Dictionary {
         for(int i = 0; i < finalFiltered.size(); i++){
             System.out.println(def.getWord() + finalFiltered.get(i).getEntryString());
         }
+    }
+
+    public int getSize(){
+        int num =0;
+        for (HashMap.Entry<Definition, ArrayList<Entry>> entry : this.DictionaryHash.entrySet()) {
+            num += entry.getValue().size();
+        }
+        return num;
+    
     }
 
 }

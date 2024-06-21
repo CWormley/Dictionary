@@ -1,3 +1,12 @@
+/****************************************************************
+*
+* File: UI.java
+* By: Claudia Wormley
+* Date: 6/21/2024
+*
+* Description: This class outputs the commmands for the user interface, takes in user input, and calls methods from other 
+classes to process given input. The return from the process is outputed along with any error messages.
+****************************************************************/
 /*
  * Main interface --- print opening , take input , loop while input isnt !q , call step 1, iterate count
  * 
@@ -41,18 +50,17 @@ public class UI {
         }
         ArrayList<Entry> temp = arg1(cmds);
         if(temp == null){return true;}
-        System.out.println(temp);
         if (cmds.size() >= 2){temp = arg2(temp,cmds.get(1));}
         if (cmds.size() >= 3){temp = arg3(temp,cmds.get(2));}
         if (cmds.size() == 4){temp = arg4(temp,cmds.get(3));}
+        System.out.println("|");
         dictionary.printEntry(temp,Definition.getDefinition(cmds.get(0)));
+        System.out.println("|");
         return true;
     }
 
     public ArrayList<Entry> arg1(ArrayList<String> cmds){
         String arg = cmds.get(0);
-        System.out.println(arg);
-        System.out.println(Definition.isDefinition(arg));
         if(arg.equals("!help")){
             printInstructions();
             return null;
@@ -107,7 +115,7 @@ public class UI {
         return temp;
     }
     public ArrayList<String> toArray (String in){
-        in.toLowerCase();
+        in = in.toLowerCase();
         ArrayList<String> cmds = new ArrayList<>();
         String sub = "";
         for(int i = 0; i < in.length(); i++){
@@ -131,6 +139,7 @@ public class UI {
     }
 
     public void printError(int i, String in){
+        System.out.println("|");
         String out="";
         switch (i) {
             case 2:
@@ -145,6 +154,8 @@ public class UI {
         }
         System.out.println("<The entered "+i+"th parameter '"+in+"' was disregarded.>");
         System.out.println(out);
+        System.out.println("|");
+
     }
 
  }
