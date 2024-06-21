@@ -14,26 +14,30 @@ import java.util.HashMap;
 
 public class Dictionary {
     
-    private HashMap<Definition, ArrayList<Entry>> DictionaryHash = new HashMap<>();
+    private HashMap<Definition, ArrayList<Entry>> DictionaryHash = new HashMap<>(); // hashmap with keys as word enums and values as list of definitoin entries
 
+    //constructor
     public Dictionary() {
         this.DictionaryHash = new HashMap<>();
     }
 
+    //add to map
     public void addEntryToHashMap( Definition def, Entry entry) {
         this.DictionaryHash.computeIfAbsent(def, k -> new ArrayList<>()).add(entry);
     }
+
+    //getter
     public HashMap<Definition, ArrayList<Entry>> getHashMap(){
         return this.DictionaryHash;
     }
 
 
     //filters
-    public  ArrayList<Entry> filter(Definition def){
+    public  ArrayList<Entry> filter(Definition def){ // filter with word
         return this.DictionaryHash.get(def);
     }
 
-    public ArrayList<Entry> filterPoS( ArrayList<Entry> sorted, PartofSpeech partofSpeech){
+    public ArrayList<Entry> filterPoS( ArrayList<Entry> sorted, PartofSpeech partofSpeech){ // filter with POS
         ArrayList<Entry> temp = new ArrayList<>();
         for(int i =0; i < sorted.size(); i ++){
             if(sorted.get(i).getPartofSpeech() == partofSpeech){
@@ -43,7 +47,8 @@ public class Dictionary {
         
         return temp;
     }
-    public ArrayList<Entry> filterRev( ArrayList<Entry> sorted){
+
+    public ArrayList<Entry> filterRev( ArrayList<Entry> sorted){ // filter with reverse
         ArrayList<Entry> temp = new ArrayList<>();
         for(int i = sorted.size()-1; i >= 0 ; i --){
             temp.add(sorted.get(i));
@@ -51,7 +56,7 @@ public class Dictionary {
         return temp;
     }
     
-    public ArrayList<Entry> filterDist( ArrayList<Entry> sorted){
+    public ArrayList<Entry> filterDist( ArrayList<Entry> sorted){ //filter with distinct
         ArrayList<Entry> temp = new ArrayList<>();
         temp.add(sorted.get(0));
         int count = 1;
@@ -72,12 +77,14 @@ public class Dictionary {
         return false;
     }
 
+    //print
     public void printEntry (ArrayList<Entry> finalFiltered , Definition def){
         for(int i = 0; i < finalFiltered.size(); i++){
             System.out.println(def.getWord() + finalFiltered.get(i).getEntryString());
         }
     }
 
+    //get size of dictionart
     public int getSize(){
         int num =0;
         for (HashMap.Entry<Definition, ArrayList<Entry>> entry : this.DictionaryHash.entrySet()) {

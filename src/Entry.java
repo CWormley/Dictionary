@@ -11,7 +11,7 @@ setters and getters are included along with support functions.
 
 //using hash map structure, use dictionary definition as pointer to linked list of entries
 
-enum PartofSpeech{
+enum PartofSpeech{ //enum data structure
     NOUN,
     ADJECTIVE,
     ADVERB,
@@ -23,9 +23,10 @@ enum PartofSpeech{
 }
 
 public class Entry {
-    private PartofSpeech partofSpeech;
-    private String meaning;
+    private PartofSpeech partofSpeech; // enum part of speech 
+    private String meaning; // definition of word
 
+    //CONSTRUCTORS
     Entry(PartofSpeech partofSpeech, String meaning){
         this.partofSpeech = partofSpeech;
         this.meaning =meaning;
@@ -34,6 +35,7 @@ public class Entry {
         this.partofSpeech = partofSpeech;
         this.meaning ="To be updated...";
     }
+
     //getters
     public PartofSpeech getPartofSpeech(){
         return this.partofSpeech;
@@ -41,6 +43,7 @@ public class Entry {
     public String getMeaning(){
         return this.meaning;
     }
+
     //setter
     public void  setMeaning (String meaning){
         this.meaning = meaning;
@@ -50,6 +53,7 @@ public class Entry {
         return " [" + getPartofSpeech() + "]: " + getMeaning() + ".";
     }
 
+    //OTHER METHODS
     public static PartofSpeech isPartOfSpeech(String input) {
         for (PartofSpeech pos : PartofSpeech.values()) {
             if (pos.name().equalsIgnoreCase(input)) {

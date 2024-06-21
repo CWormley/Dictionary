@@ -8,7 +8,7 @@
 ****************************************************************/
 public class Run {
     public static Dictionary init(){
-
+        // create instances of each POS enum
         PartofSpeech noun = PartofSpeech.NOUN;
         PartofSpeech verb = PartofSpeech.VERB;
         PartofSpeech adjective = PartofSpeech.ADJECTIVE;
@@ -18,12 +18,14 @@ public class Run {
         PartofSpeech pronoun = PartofSpeech.PRONOUN;
         PartofSpeech preposition = PartofSpeech.PREPOSITION;
 
+        // create instance of each Definition enum
         Definition arrow = Definition.ARROW;
         Definition placeholder = Definition.PLACEHOLDER;
         Definition book = Definition.BOOK;
         Definition distinct = Definition.DISTINCT;
         Definition reverse = Definition.REVERSE;
 
+        // create entries for each definition
         Entry entry1 = new Entry(noun, "Here is one arrow: <IMG> -=>> </IMG>");
 
         Entry entry2 = new Entry(noun, "A set of pages.");
@@ -69,6 +71,7 @@ public class Run {
         Entry entry37 = new Entry(verb, "Turn something inside out.");
 
         Dictionary dictionary = new Dictionary();
+        // add entries to hash map with Dictionary key.
         dictionary.addEntryToHashMap(arrow, entry1);
 
         dictionary.addEntryToHashMap(book, entry2);

@@ -26,8 +26,8 @@ public enum Definition{ //enum data structure
     REVERSE("Reverse");
 
 
-    private final String word;
-    private Definition def; 
+    private final String word; // The word that is being defined
+    private Definition def; // Enum storing unique word
 
     //CONSTRUCTORS
     Definition (Definition def, String word){ 

@@ -24,16 +24,20 @@ classes to process given input. The return from the process is outputed along wi
 import java.util.ArrayList;
 import java.util.Scanner;
 public class UI {   
+    //new instance of dictionary
     Dictionary dictionary;
+
     public void start(Dictionary dict){
-        dictionary = dict;
+
+        dictionary = dict;//populated dictionary
         Scanner scn = new Scanner(System.in);
-        Boolean check = true;
-        int count = 1;
-        while(check){
+        Boolean check = true; // check if program should quit
+        int count = 1; // number of searches
+
+        while(check){ // Format search
             System.out.print("Search ["+count+"]: ");
-            String in = scn.nextLine();
-            check = processInput(in);
+            String in = scn.nextLine(); //input
+            check = processInput(in); // process input
             count++;
         }
         scn.close();
@@ -41,42 +45,44 @@ public class UI {
     }
 
      public Boolean processInput(String in){
-        if(in.equals("!q")){return false;}
-        ArrayList<String> cmds = toArray(in);
+        if(in.equals("!q")){return false;} //quit program
+        ArrayList<String> cmds = toArray(in); // formated list of inputed commands
 
-        if(cmds.size() == 0 || cmds.size()> 4){
+        if(cmds.size() == 0 || cmds.size()> 4){ // wrong # of args
             printInstructions();
             return true;
         }
-        ArrayList<Entry> temp = arg1(cmds);
-        if(temp == null){return true;}
-        if (cmds.size() >= 2){temp = arg2(temp,cmds.get(1));}
-        if (cmds.size() >= 3){temp = arg3(temp,cmds.get(2));}
-        if (cmds.size() == 4){temp = arg4(temp,cmds.get(3));}
+
+        ArrayList<Entry> temp = arg1(cmds.get(0));  //filter by word
+        if(temp == null){return true;} // if no matching definitions
+        if (cmds.size() >= 2){temp = arg2(temp,cmds.get(1));} // check 2nd arg
+        if (cmds.size() >= 3){temp = arg3(temp,cmds.get(2));} // check 3rd arg
+        if (cmds.size() == 4){temp = arg4(temp,cmds.get(3));} // check 4th arg
+
+        //print Definitons that fit args
         System.out.println("|");
         dictionary.printEntry(temp,Definition.getDefinition(cmds.get(0)));
         System.out.println("|");
         return true;
     }
 
-    public ArrayList<Entry> arg1(ArrayList<String> cmds){
-        String arg = cmds.get(0);
+    public ArrayList<Entry> arg1(String arg){
         if(arg.equals("!help")){
             printInstructions();
             return null;
-        }else if(!Definition.isDefinition(arg)){
+        }else if(!Definition.isDefinition(arg)){ // if not in Defintion Enum
             System.out.println("|");
             System.out.println("<NOT FOUND> To be considered for the next release. Thank you.");
             System.out.println("|");
             printInstructions();
             return null;
         }
-        ArrayList<Entry> inProgress = dictionary.filter(Definition.getDefinition(arg));
+        ArrayList<Entry> inProgress = dictionary.filter(Definition.getDefinition(arg)); //filter list of dictionary entries based of word
         return inProgress;
     }
 
     public ArrayList<Entry> arg2(ArrayList<Entry>temp, String cmd){
-        PartofSpeech pos = Entry.isPartOfSpeech(cmd);
+        PartofSpeech pos = Entry.isPartOfSpeech(cmd); // atempt to assign cmd to POS
         if(pos != null){
             temp = dictionary.filterPoS(temp, pos);
         }else{
@@ -116,7 +122,7 @@ public class UI {
     }
     public ArrayList<String> toArray (String in){
         in = in.toLowerCase();
-        ArrayList<String> cmds = new ArrayList<>();
+        ArrayList<String> cmds = new ArrayList<>(); // seperated commands
         String sub = "";
         for(int i = 0; i < in.length(); i++){
             if(in.charAt(i) == ' '){
@@ -138,9 +144,9 @@ public class UI {
         System.out.println("|");
     }
 
-    public void printError(int i, String in){
+    public void printError(int i, String in){ // print errors based off args.
         System.out.println("|");
-        String out="";
+        String out=""; //custom output
         switch (i) {
             case 2:
                 out = "<The 2nd parameter should be a part of speech or 'distinct' or 'reverse'.>";
